@@ -1,8 +1,7 @@
-# File types
-.exe
-.o
-.obj
-.dll
 
-# Folder
-build/
+*
+
+!src/
+!.gitignore
+!CMakeLists.txt
+!README.md
