@@ -25,7 +25,6 @@ Executable file will be in `./Debug` folder
 
 ```
 .  
-├── build
 └── src                             // All source code for app 
     ├── core                        // Logic handlers
     │   └── index.cpp
