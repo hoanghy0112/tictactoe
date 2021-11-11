@@ -1,4 +1,5 @@
 #include <iostream>
+#include "draw.h"
 
 using namespace std;
 
@@ -32,9 +33,12 @@ void printBoard(int size)
 
 int main()
 {
-   cout << "Hello world\n";
+   int board[9][9] = {0};
+   board[1][1] = 1;
+   board[2][3] = 2;
+   int width = 4, height = 4;
 
-   cout << "New line\n";
+   drawBoard(width, height, board);
 
    return 0;
 }
