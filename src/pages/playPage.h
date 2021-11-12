@@ -3,6 +3,7 @@
 #include <conio.h>
 
 #include "../draw/index.h"
+#include "../core/index.h"
 
 using namespace std;
 
@@ -16,6 +17,7 @@ void playPage(int width, int height) {
 
    char inputChar;
 
+   drawBoard(width, height, board, choosingX, choosingY);
    while (!winningState) {
       system("cls");
 
@@ -24,11 +26,9 @@ void playPage(int width, int height) {
       choosingY += height;
       choosingY %= height;
 
-      drawBoard(width, height, board, choosingX, choosingY);
       cout << "Press up, down, left, right arrow to move\n";
       cout << "Press Enter to play\n";
       cout << "Press ESC to escape\n";
-      inputChar = _getch();
       // cout << (int) inputChar = _getch();
 
       switch (int(inputChar)) {
@@ -37,8 +37,6 @@ void playPage(int width, int height) {
             break;
          case 13: 
             if (board[choosingX][choosingY] == 0) board[choosingX][choosingY] = currentPlayer;
-            if (currentPlayer == 1) currentPlayer = 2;
-            else currentPlayer = 1;
             break;
          case 72:
             choosingY -= 1;
@@ -53,5 +51,16 @@ void playPage(int width, int height) {
             choosingX -= 1;
             break;
       }
+
+      winningState = winningCheck(width, height, board, currentPlayer);
+
+      drawBoard(width, height, board, choosingX, choosingY);
+      if (!winningState) {
+         if (currentPlayer == 1) currentPlayer = 2;
+         else currentPlayer = 1;
+         inputChar = _getch();
+      } 
    }
+
+   cout << "\n" << CHAR_CODE[currentPlayer] << " is the winner\n";
 }
