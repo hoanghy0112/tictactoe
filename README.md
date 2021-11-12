@@ -1,6 +1,6 @@
 # Tic Tac Toe Game
 
-## Requesting
+## Requirements
 - Git
 - Cmake
 - Raylib library
@@ -18,22 +18,6 @@ mkdir build
 cd build
 cmake ..
 cmake --build .
-```
-
-## Project structure
-```
-.
-└── src
-    ├── core
-    │   └── index.h
-    │   ...
-    ├── draw
-    │   └── index.h
-    │   ...
-    └── pages
-    │   └── index.h
-    │   ...
-    └── index.cpp
 ```
 
 ## Images
