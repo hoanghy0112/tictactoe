@@ -15,7 +15,7 @@ void playPage(int width, int height) {
    int currentPlayer = 1;
    bool winningState = false;
 
-   char inputChar;
+   char inputChar = ' ';
 
    drawBoard(width, height, board, choosingX, choosingY);
    while (!winningState) {
@@ -29,7 +29,6 @@ void playPage(int width, int height) {
       cout << "Press up, down, left, right arrow to move\n";
       cout << "Press Enter to play\n";
       cout << "Press ESC to escape\n";
-      // cout << (int) inputChar = _getch();
 
       switch (int(inputChar)) {
          case 27: 
