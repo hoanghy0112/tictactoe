@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(tictactoe)
+project(tic-tac-toe)
 set(CMAKE_CXX_STANDRA 14)
 
-add_executable(tictactoe src/index.cpp)
+add_executable(tic-tac-toe main.cpp)
