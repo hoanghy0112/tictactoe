@@ -128,4 +128,4 @@ CMakeFiles/tictactoe.dir/index.cpp.o: \
  /usr/include/c++/11.1.0/bits/basic_ios.tcc \
  /usr/include/c++/11.1.0/bits/ostream.tcc /usr/include/c++/11.1.0/istream \
  /usr/include/c++/11.1.0/bits/istream.tcc \
- /home/hy/Learning/C++/tictactoe/draw.h
+ /home/hy/Learning/C++/tictactoe/src/draw/draw.h
