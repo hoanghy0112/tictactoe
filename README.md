@@ -1,6 +1,6 @@
 # Tic-tac-toe game
 
-## Set up project   
+## Set up project
 
 Clone project
 
@@ -9,23 +9,27 @@ git clone https://github.com/hoanghy0112/tictactoe.git
 cd tictactoe
 ```
 
-Create CMake 
+Create CMake
+
 ```
-cmake .
+mkdir build
+cd build
+cmake ..
 ```
 
 Build project
+
 ```
 cmake --build .
 ```
 
-Executable file will be in `./Debug` folder
+Executable file will be in `build` folder
 
-## Project structure 
+## Project structure
 
 ```
-.  
-└── src                             // All source code for app 
+.
+└── src                             // All source code for app
     ├── core                        // Logic handlers
     │   └── index.h
     │   ...
@@ -37,4 +41,3 @@ Executable file will be in `./Debug` folder
     │   ...
     └── index.cpp                   // Main file
 ```
-

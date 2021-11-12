@@ -1,9 +1,7 @@
+# File type
+.exe
+.o
+.obj
 
-/*
-
-!src/
-!material/ 
-!.gitignore
-!CMakeLists.txt
-!README.md
-!assignment.md
+# Folder
+build/
