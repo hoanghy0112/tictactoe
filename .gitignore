@@ -1,0 +1,8 @@
+# File types
+.exe
+.o
+.obj
+.dll
+
+# Folder
+build/
