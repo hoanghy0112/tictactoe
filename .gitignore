@@ -2,6 +2,8 @@
 /*
 
 !src/
+!material/ 
 !.gitignore
 !CMakeLists.txt
 !README.md
+!assignment.md

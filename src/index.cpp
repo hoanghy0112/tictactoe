@@ -34,12 +34,6 @@ void printBoard(int size)
 
 int main()
 {
-   // int board[9][9] = {0};
-   // board[1][1] = 1;
-   // board[2][3] = 2;
-   // int width = 4, height = 4;
-
-   // drawBoard(width, height, board, 1, 1);
    playPage(5, 5);
 
    cout << "\n";
