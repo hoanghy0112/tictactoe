@@ -27,13 +27,13 @@ Executable file will be in `./Debug` folder
 .  
 └── src                             // All source code for app 
     ├── core                        // Logic handlers
-    │   └── index.cpp
+    │   └── index.h
     │   ...
     ├── draw                        // Graphic handlers
-    │   └── index.cpp
+    │   └── index.h
     │   ...
     └── pages                       // Page handlers - Perform page interface
-    │   └── index.cpp
+    │   └── index.h
     │   ...
     └── index.cpp                   // Main file
 ```

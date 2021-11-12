@@ -17,6 +17,8 @@ const char CHOOSING_CHAR = '?';
 const char X_CHAR = 'X';
 const char O_CHAR = 'O';
 
+const char CHAR_CODE[3] = {' ', 'X', 'O'};
+
 // TODO - Draw board function
 void drawBoard(
       int columnNum, 
@@ -37,21 +39,19 @@ void drawBoard(
       for (int cellHeightIter = 0; cellHeightIter < CELL_HEIGHT - 1; cellHeightIter++) {
          cout << "|";
          for (int x = 0; x < columnNum; x++) {
+            if (x == choosingX && y == choosingY && cellHeightIter == CELL_HEIGHT / 2) {
+                  for (int cellWidthIter = 0; cellWidthIter < CELL_WIDTH - 2; cellWidthIter++) {
+                     if (cellWidthIter == CELL_WIDTH / 2 - 1) {
+                        cout << ">" << CHAR_CODE[board[x][y]] << "<";
+                     } else {
+                        cout << " ";
+                     }
+                  }
+            } else
             for (int cellWidthIter = 0; cellWidthIter < CELL_WIDTH; cellWidthIter++) {
                if (cellHeightIter == CELL_HEIGHT / 2 && cellWidthIter == CELL_WIDTH / 2) {
-                  if (x == choosingX && y == choosingY) cout << CHOOSING_CHAR;
-                  else
-                  switch (board[x][y]) {
-                     case 1: 
-                        cout << X_CHAR;
-                        break;
-                     case 2:
-                        cout << O_CHAR;
-                        break;
-                     default: 
-                        cout << " ";
-                        break;
-                  }
+                  // if (x == choosingX && y == choosingY) cout << CHOOSING_CHAR;
+                  cout << CHAR_CODE[board[x][y]];
                } else cout << " ";
             }
             cout << "|";
