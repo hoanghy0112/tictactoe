@@ -1,5 +1,6 @@
 #pragma once
 #include "utils.hpp"
 
-Point negamax(Node node, int depth);
-Point generateMove(int width, int height, Point board[9][9], Point currentMove);
+bool assess(Board board, PointType currentPlayer, int winPoint = 3);
+Node negamax(Board board, PointType currentPlayer, int score, Node parentAlphaBeta, int depth, int winPoint = 3);
+Point generateMove(int width, int height, PointType** board, Point currentMove);
