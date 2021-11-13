@@ -1,8 +1,48 @@
 #include "ai.hpp"
 
-const int PRIMARY_POINT = 20;
 
-bool assess(Board board, PointType currentPlayer, int winPoint = 3)
+void drawPoint(PointType** board) {
+   cout << "\n";
+   for (int x = 0; x < WIDTH; x++) {
+      for (int y = 0; y < WIDTH; y++) {
+         if (board[x][y] == NONE) cout << " ";
+         else if (board[x][y] == X) cout << "X";
+         else cout << "O";
+      }
+      cout << "\n";
+   }
+}
+
+void drawBoard(Board boardData) {
+   PointType** board = boardData.data;
+   cout << "\n";
+   for (int x = 0; x < boardData.width; x++) {
+      for (int y = 0; y < boardData.height; y++) {
+         if (board[x][y] == NONE) cout << " ";
+         else if (board[x][y] == X) cout << "X";
+         else cout << "O";
+      }
+      cout << "\n";
+   }
+}
+
+Board copyBoard(Board board) {
+   Board newBoard;
+   newBoard.width = board.width;
+   newBoard.height = board.height;
+   cout << "fasfd";
+   newBoard.data = new PointType*[board.width];
+   for (int x = 0; x < board.width; x++) {
+      newBoard.data[x] = new PointType[board.height];
+      for (int y = 0; y < board.height; y++) {
+         newBoard.data[x][y] = board.data[x][y];
+      }
+   }
+   return newBoard;
+}
+
+
+bool assess(Board board, PointType currentPlayer, int winPoint)
 {
    bool isWin = winningCheck(
        board.width,
@@ -18,7 +58,7 @@ Node negamax(
     int score,
     Node parentNode,
     int depth,
-    int winPoint = 3)
+    int winPoint)
 {
    Node currentNode;
    int alpha, beta;
@@ -44,9 +84,15 @@ Node negamax(
       const int x = i / board.height;
       const int y = i % board.height;
 
+      cout << "before if";
       if (board.data[x][y] == NONE)
       {
-         Board newBoard = board;
+         cout << "\nbefore draw board";
+         drawBoard(board);
+         cout << depth << "\n";
+         cout << "before copyBoard";
+         Board newBoard = copyBoard(board);
+         cout << "after copyBoard";
          PointType nextTurn;
 
          if (currentPlayer == X) nextTurn = O;
@@ -69,6 +115,8 @@ Node negamax(
          if (alpha > beta) break;
       }
    }
+
+   return currentNode;
 }
 
 
@@ -80,13 +128,20 @@ Point generateMove(int width, int height, PointType** board, Point currentMove) 
    };
 
    Node parentNode = {
-      value: 0
+      value: 0,
+      point: currentMove
    };
 
    Node nextMove = negamax(boardData, currentMove.type, PRIMARY_POINT, parentNode, 0);
 
-   return Point{
+   PointType newType;
+   if (currentMove.type == X) newType = O;
+   else newType = X;
+
+   Point returnVal = {
       x: nextMove.point.x,
-      y: nextMove.point.y
+      y: nextMove.point.y,
+      type: newType
    };
+   return returnVal;
 }
