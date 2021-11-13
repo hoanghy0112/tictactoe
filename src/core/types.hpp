@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////
+﻿/////////////////////////////////////////////////////////
 //                                                     //
 //                       _oo0oo_                       //
 //                      o8888888o                      //
@@ -33,3 +33,34 @@
 /////////////////////////////////////////////////////////
 
 #pragma once
+
+/*
+** Type of point
+*/
+enum class PointType
+{
+	None = 0,
+	Player_1,
+	Player_2,
+};
+
+/*
+** Point in a board
+*/
+struct Point
+{
+	int			x;
+	int			y;
+	PointType	type;
+};
+
+/*
+** Struct of board
+*/
+struct BoardData
+{
+	int			size;
+	Point**		data;
+
+	using SharePtr = std::shared_ptr<BoardData>;
+};
