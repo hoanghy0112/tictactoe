@@ -1,7 +1,7 @@
 #! /usr/bin/zsh
 
 mkdir build
-cd build
+cd build 
 
 cmake ..
 cmake --build .
