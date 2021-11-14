@@ -52,4 +52,8 @@ public:
 
 private:
 	GameData::Ref	m_gameData;
+
+	sf::Color		m_color_background;
+	sf::Sprite		m_background;
+	float			m_time;
 };

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<assets>
+    <textures>
+        <texture id="1">assets/textures/splash_background.png</texture>
+    </textures>
+    <soundbuffers>
+    </soundbuffers>
+</assets>

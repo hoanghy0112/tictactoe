@@ -83,6 +83,8 @@ void Application::init()
 	m_gameData->window.create(sf::VideoMode(900, 500), "Tic Tac Toe", sf::Style::Close);
 	m_gameData->window.setFramerateLimit(60);
 
+	m_gameData->assetsManager.init();
+
 	m_gameData->sceneManager.addScene(Scene::Ref(new SplashScene(this->m_gameData)));
 }
 

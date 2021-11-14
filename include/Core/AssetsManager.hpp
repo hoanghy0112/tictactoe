@@ -36,10 +36,15 @@
 
 #include <Config.hpp>
 
+class Application;
+
 class AssetsManager
 {
 public:
-	AssetsManager();
+	friend class Application;
+
+public:
+	AssetsManager() = default;
 	~AssetsManager() = default;
 
 	sf::Texture& getTexture(int id);
@@ -50,6 +55,7 @@ private:
 	void init();
 
 private:
-	std::map<int, sf::Texture>	m_textures;
-	sf::Font					m_font;
+	std::map<int, sf::Texture>		m_textures;
+	std::map<int, sf::SoundBuffer>	m_soundBuffer;
+	sf::Font						m_font;
 };

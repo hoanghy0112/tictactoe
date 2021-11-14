@@ -32,23 +32,18 @@
 //  - Nguyễn Hoàng Hy                                  //
 /////////////////////////////////////////////////////////
 
-#include <Scenes/SplashScene.hpp>
 #include <Scenes/MenuScene.hpp>
 
-SplashScene::SplashScene(GameData::Ref gameData) :
-	m_gameData(gameData),
-	m_time(0.f)
+MenuScene::MenuScene(GameData::Ref gameData) :
+	m_gameData(gameData)
 {
 }
 
-void SplashScene::init()
+void MenuScene::init()
 {
-	m_color_background = sf::Color(24, 29, 49, 255);
-	m_background.setTexture(m_gameData->assetsManager.getTexture(1));
-	m_background.setColor(m_color_background);
 }
 
-void SplashScene::handleEvent()
+void MenuScene::handleEvent()
 {
 	sf::Event event;
 
@@ -61,34 +56,15 @@ void SplashScene::handleEvent()
 	}
 }
 
-void SplashScene::update(float delta)
+void MenuScene::update(float delta)
 {
-	m_time += delta;
-
-	if (m_time > 3.f)
-	{
-		m_gameData->sceneManager.addScene(Scene::Ref(new MenuScene(m_gameData)));
-	}
-	else
-	{
-		m_color_background.a = static_cast<sf::Uint8>(std::sin(m_time * 60 * DEG_TO_RAD) * 255);
-
-		m_background.setColor(m_color_background);
-	}
 }
 
-void SplashScene::draw()
+void MenuScene::draw()
 {
 	m_gameData->window.clear(sf::Color(240, 233, 210, 255));
 
-	m_gameData->window.draw(m_background);
+
 
 	m_gameData->window.display();
 }
-
-/*
-**  F0E9D2
-**  E6DDC4
-**  678983
-**  181D31
-*/

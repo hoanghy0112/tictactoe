@@ -44,6 +44,12 @@
 
 
 /*
+**  Include tinyxml2
+*/
+#include <utils/tinyxml2.h>
+
+
+/*
 **  Include others
 */
 #include <algorithm>
@@ -57,3 +63,4 @@
 **  Define macros
 */
 #define TIC_TAC_TOE_VERSION		"1.0"
+#define DEG_TO_RAD				0.01745

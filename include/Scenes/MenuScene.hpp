@@ -32,63 +32,24 @@
 //  - Nguyễn Hoàng Hy                                  //
 /////////////////////////////////////////////////////////
 
-#include <Scenes/SplashScene.hpp>
-#include <Scenes/MenuScene.hpp>
+#pragma once
 
-SplashScene::SplashScene(GameData::Ref gameData) :
-	m_gameData(gameData),
-	m_time(0.f)
+#include <Config.hpp>
+#include <Types.hpp>
+#include <Scenes/Scene.hpp>
+
+class MenuScene : public Scene
 {
-}
+public:
+	MenuScene(GameData::Ref gameData);
+	~MenuScene() = default;
 
-void SplashScene::init()
-{
-	m_color_background = sf::Color(24, 29, 49, 255);
-	m_background.setTexture(m_gameData->assetsManager.getTexture(1));
-	m_background.setColor(m_color_background);
-}
+	void init() override;
 
-void SplashScene::handleEvent()
-{
-	sf::Event event;
+	void handleEvent() override;
+	void update(float delta) override;
+	void draw() override;
 
-	while (m_gameData->window.pollEvent(event))
-	{
-		if (event.type == sf::Event::EventType::Closed)
-		{
-			m_gameData->window.close();
-		}
-	}
-}
-
-void SplashScene::update(float delta)
-{
-	m_time += delta;
-
-	if (m_time > 3.f)
-	{
-		m_gameData->sceneManager.addScene(Scene::Ref(new MenuScene(m_gameData)));
-	}
-	else
-	{
-		m_color_background.a = static_cast<sf::Uint8>(std::sin(m_time * 60 * DEG_TO_RAD) * 255);
-
-		m_background.setColor(m_color_background);
-	}
-}
-
-void SplashScene::draw()
-{
-	m_gameData->window.clear(sf::Color(240, 233, 210, 255));
-
-	m_gameData->window.draw(m_background);
-
-	m_gameData->window.display();
-}
-
-/*
-**  F0E9D2
-**  E6DDC4
-**  678983
-**  181D31
-*/
+private:
+	GameData::Ref	m_gameData;
+};
