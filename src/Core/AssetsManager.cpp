@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////
+﻿/////////////////////////////////////////////////////////
 //                                                     //
 //                       _oo0oo_                       //
 //                      o8888888o                      //
@@ -32,12 +32,23 @@
 //  - Nguyễn Hoàng Hy                                  //
 /////////////////////////////////////////////////////////
 
-#include <config.hpp>
-#include <src/application.hpp>
+#include <Core/AssetsManager.hpp>
 
-int main(int argc, char* argv[])
+AssetsManager::AssetsManager()
 {
-	Application::getInstance()->run();
+	init();
+}
 
-    return 0;
+sf::Texture & AssetsManager::getTexture(int id)
+{
+	return m_textures[id];
+}
+
+sf::Font& AssetsManager::getFont()
+{
+	return m_font;
+}
+
+void AssetsManager::init()
+{
 }

@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////
+﻿/////////////////////////////////////////////////////////
 //                                                     //
 //                       _oo0oo_                       //
 //                      o8888888o                      //
@@ -32,4 +32,22 @@
 //  - Nguyễn Hoàng Hy                                  //
 /////////////////////////////////////////////////////////
 
-#include <src/ai/ai.hpp>
+#pragma once
+
+#include <Config.hpp>
+
+class Scene
+{
+public:
+	using Ref = std::unique_ptr<Scene>;
+
+public:
+	virtual void init() = 0;
+
+	virtual void handleEvent() = 0;
+	virtual void update(float delta) = 0;
+	virtual void draw() = 0;
+
+	virtual void pause() {}
+	virtual void resume() {}
+};

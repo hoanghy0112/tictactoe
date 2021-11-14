@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////
+﻿/////////////////////////////////////////////////////////
 //                                                     //
 //                       _oo0oo_                       //
 //                      o8888888o                      //
@@ -32,47 +32,18 @@
 //  - Nguyễn Hoàng Hy                                  //
 /////////////////////////////////////////////////////////
 
-#include <src/application.hpp>
-#include <src/core/board.hpp>
+#pragma once
 
-static Application::Ptr s_application;
+#include <Config.hpp>
+#include <Core/SceneManager.hpp>
+#include <Core/AssetsManager.hpp>
 
-Application* Application::getInstance()
+struct GameData
 {
-	if (!s_application)
-	{
-		s_application = std::make_unique<Application>();
-	}
+	using Ref = std::shared_ptr<GameData>;
 
-	return s_application.get();
-}
+	SceneManager		sceneManager;
+	AssetsManager		assetsManager;
 
-void Application::run()
-{
-	Board b(Board::Type::Seven);
-	
-	// Create window
-	InitWindow(900, 500, "Tic Tac Toe");
-
-	// Turn off exit key
-	SetExitKey(KEY_NULL);
-	
-	// Set FPS
-	SetTargetFPS(60);
-	std::cout << GetFontDefault().recs;
-	// Main loop
-	while (!WindowShouldClose())
-	{
-		b.update();
-
-		// Draw anything
-		BeginDrawing();
-		ClearBackground(BLACK);
-		b.draw();
-		DrawFPS(0, 0);
-		EndDrawing();
-	}
-
-	// Destroy window
-	CloseWindow();
-}
+	sf::RenderWindow	window;
+};

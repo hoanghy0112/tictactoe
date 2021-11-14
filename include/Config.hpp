@@ -35,15 +35,25 @@
 #pragma once
 
 /*
-** Include raylib
+**  Include SFML library
 */
-#include <raylib.h>
-//#include <raudio.h>
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 
 
 /*
-** Include others
+**  Include others
 */
-#include <iostream>
-#include <string>
 #include <algorithm>
+#include <memory>
+#include <iostream>
+#include <stack>
+#include <map>
+
+
+/*
+**  Define macros
+*/
+#define TIC_TAC_TOE_VERSION		"1.0"

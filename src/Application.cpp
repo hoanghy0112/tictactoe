@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////
+﻿/////////////////////////////////////////////////////////
 //                                                     //
 //                       _oo0oo_                       //
 //                      o8888888o                      //
@@ -32,41 +32,61 @@
 //  - Nguyễn Hoàng Hy                                  //
 /////////////////////////////////////////////////////////
 
-#pragma once
+#include <Application.hpp>
+#include <Scenes/SplashScene.hpp>
 
-#include <config.hpp>
-#include <src/core/types.hpp>
+Application::Ref s_application_instance = nullptr;
 
-class Board
+Application::Application()
 {
-public:
-	/*
-	** Pointer of class Board
-	*/
-	using Ptr = std::unique_ptr<Board>;
+	init();
+}
 
-	enum class Type
+Application::~Application()
+{
+	destroy();
+}
+
+Application::Ref& Application::getInstance()
+{
+	if (!s_application_instance)
 	{
-		Three = 0,		// 3x3 board
-		Five,			// 5x5 board
-		Seven			// 7x7 board
-	};
+		s_application_instance = std::make_unique<Application>();
+	}
 
-private:
-	BoardData::SharePtr		m_board;
+	return s_application_instance;
+}
 
-	int						m_gridX;
-	int						m_gridY;
-	int						m_size_of_cell;
+void Application::run()
+{
+	sf::Clock clock;
+	sf::Time elapsedTime = sf::Time::Zero;
 
+	while (m_gameData->window.isOpen())
+	{
+		elapsedTime = clock.restart();
 
+		m_gameData->sceneManager.processSceneChange();
 
-public:
-	Board(Type size);
-	~Board();
+		m_gameData->sceneManager.getCurrentScene()->handleEvent();
 
-	void update();
+		m_gameData->sceneManager.getCurrentScene()->update(elapsedTime.asSeconds());
 
-	// Draw the board on the screen
-	void draw();
-};
+		m_gameData->sceneManager.getCurrentScene()->draw();
+	}
+}
+
+void Application::init()
+{
+	m_gameData = std::make_shared<GameData>();
+
+	m_gameData->window.create(sf::VideoMode(900, 500), "Tic Tac Toe", sf::Style::Close);
+	m_gameData->window.setFramerateLimit(60);
+
+	m_gameData->sceneManager.addScene(Scene::Ref(new SplashScene(this->m_gameData)));
+}
+
+void Application::destroy()
+{
+	m_gameData.reset();
+}

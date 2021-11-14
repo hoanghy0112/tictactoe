@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////
+﻿/////////////////////////////////////////////////////////
 //                                                     //
 //                       _oo0oo_                       //
 //                      o8888888o                      //
@@ -34,24 +34,26 @@
 
 #pragma once
 
-#include <config.hpp>
+#include <Config.hpp>
+#include <Types.hpp>
 
 class Application
 {
 public:
-	/*
-	** Pointer of class Application
-	*/
-	using Ptr = std::unique_ptr<Application>;
+	using Ref = std::unique_ptr<Application>;
 
 public:
-	Application() = default;
-	~Application() = default;
+	Application();
+	~Application();
 
-	static Application* getInstance();
+	static Ref& getInstance();
 
-	/*
-	** This method to run all of game
-	*/
 	void run();
+
+	void init();
+
+	void destroy();
+
+private:
+	GameData::Ref	m_gameData;
 };

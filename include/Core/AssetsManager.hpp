@@ -34,33 +34,22 @@
 
 #pragma once
 
-/*
-** Type of point
-*/
-enum class PointType
-{
-	None = 0,
-	Player_1,
-	Player_2,
-};
+#include <Config.hpp>
 
-/*
-** Point in a board
-*/
-struct Point
+class AssetsManager
 {
-	int			x;
-	int			y;
-	PointType	type;
-};
+public:
+	AssetsManager();
+	~AssetsManager() = default;
 
-/*
-** Struct of board
-*/
-struct BoardData
-{
-	int			size;
-	Point**		data;
+	sf::Texture& getTexture(int id);
 
-	using SharePtr = std::shared_ptr<BoardData>;
+	sf::Font& getFont();
+
+private:
+	void init();
+
+private:
+	std::map<int, sf::Texture>	m_textures;
+	sf::Font					m_font;
 };

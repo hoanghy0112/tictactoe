@@ -3,7 +3,7 @@
 ## Requirements
 - Git
 - Cmake
-- Raylib library
+- SFML library
 - Compiler C++ such as: Visual Studio, MinGW / GCC,...
 
 ## Build project
