@@ -10,6 +10,14 @@ Node max(Node first,Node second) {
    }
 }
 
+Node min(Node first,Node second) {
+   if (first.value < second.value) {
+      return first;
+   } else {
+      return second;
+   }
+}
+
 bool winningCheck(int width, int height, PointType **board, PointType type, int winPoint)
 {
    //* Vertical check
@@ -49,7 +57,7 @@ bool winningCheck(int width, int height, PointType **board, PointType type, int 
       for (int y = 0; y < height; y++)
       {
          int newX = x + y;
-         if (newX < 0 || newX > width)
+         if (newX < 0 || newX >= width)
          {
             continue;
          }
@@ -68,7 +76,7 @@ bool winningCheck(int width, int height, PointType **board, PointType type, int 
       for (int y = 0; y < height; y++)
       {
          int newX = x - y;
-         if (newX < 0 || newX > width)
+         if (newX < 0 || newX >= width)
          {
             continue;
          }

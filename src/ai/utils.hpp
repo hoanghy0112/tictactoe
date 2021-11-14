@@ -47,3 +47,4 @@ const char CHAR_CODE[3] = {' ', 'X', 'O'};
 
 bool winningCheck(int width, int height, PointType **board, PointType type, int winPoint = 3);
 Node max(Node first, Node second);
+Node min(Node first, Node second);

@@ -1,10 +1,13 @@
 #include "ai.hpp"
 
+const int LENGTH = 100000;
+int boardListLength = 0;
+Board boardList[LENGTH];
 
 void drawPoint(PointType** board) {
    cout << "\n";
    for (int x = 0; x < WIDTH; x++) {
-      for (int y = 0; y < WIDTH; y++) {
+      for (int y = 0; y < HEIGHT; y++) {
          if (board[x][y] == NONE) cout << " ";
          else if (board[x][y] == X) cout << "X";
          else cout << "O";
@@ -30,7 +33,6 @@ Board copyBoard(Board board) {
    Board newBoard;
    newBoard.width = board.width;
    newBoard.height = board.height;
-   cout << "fasfd";
    newBoard.data = new PointType*[board.width];
    for (int x = 0; x < board.width; x++) {
       newBoard.data[x] = new PointType[board.height];
@@ -41,6 +43,55 @@ Board copyBoard(Board board) {
    return newBoard;
 }
 
+int minInt(int first, int second) {
+   if (first < second) return first;
+   else return second;
+}
+
+int maxInt(int first, int second) {
+   if (first > second) return first;
+   else return second;
+}
+
+bool wouldBeChecked(Board board, int x, int y, int radius = 2) {
+   const int width = board.width;
+   const int height = board.height;
+
+   int minX = maxInt(x - radius, 0);
+   int minY = maxInt(y - radius, 0);
+   int maxX = minInt(x + radius + 1, width);
+   int maxY = minInt(y + radius + 1, height);
+
+   for (int iterX = minX; iterX < maxX; iterX++)
+      for (int iterY = minY; iterY < maxY; iterY++) {
+         if (board.data[iterX][iterY] != NONE) return true;
+      }
+
+   return false;
+}
+
+bool isEqual(Board first, Board second) {
+   if (first.width != second.width || first.height != second.height) return false;
+
+   const int width = first.width;
+   const int height = first.height;
+
+   for (int x = 0; x < width; x++)
+      for (int y = 0; y < width; y++)
+      {
+         if (first.data[x][y] != second.data[x][y]) return false;
+      }
+   
+   return true;
+}
+
+bool isIn(Board item, Board* boardList) {
+   for (int i = 0; i < boardListLength; i++) {
+      if (isEqual(item, boardList[i])) return true;
+   }
+   return false;
+}
+
 
 bool assess(Board board, PointType currentPlayer, int winPoint)
 {
@@ -48,100 +99,117 @@ bool assess(Board board, PointType currentPlayer, int winPoint)
        board.width,
        board.height,
        board.data,
-       currentPlayer);
+       currentPlayer, 
+       winPoint);
    return isWin;
 }
 
-Node negamax(
+int times = 0;
+
+Node minimap(
     Board board,
     PointType currentPlayer,
-    int score,
-    Node parentNode,
     int depth,
+    int alpha,
+    int beta,
+    bool isMax,
     int winPoint)
 {
    Node currentNode;
-   int alpha, beta;
+   bool isFull = true;
 
-   if (parentNode.value <= 0) { // current node is max node
-      currentNode.value = -9999;
-      beta = parentNode.value;
-   } else {
-      currentNode.value = 9999;
-      alpha = parentNode.value;
-   } 
+   if (isMax) currentNode.value = -9999;
+   else currentNode.value = 9999;
+
+   if (depth > 4) {
+      Node returnNode;
+      returnNode.value = +0;
+      return returnNode;
+   }
 
    if (assess(board, currentPlayer, winPoint))
    {
       Node returnNode;
-      if (parentNode.value <= 0) returnNode.value = score;
-      else returnNode.value = -score;
+      returnNode.point.x = -1;
+      returnNode.point.y = -1;
+      int score = PRIMARY_POINT - depth;
+      if (depth % 2 == 0) returnNode.value = -score;
+      else returnNode.value = +score;
       return returnNode;
-   }
+   } 
 
    for (int i = 0; i < board.width * board.height; i++)
    {
       const int x = i / board.height;
       const int y = i % board.height;
 
-      cout << "before if";
       if (board.data[x][y] == NONE)
       {
-         cout << "\nbefore draw board";
-         drawBoard(board);
-         cout << depth << "\n";
-         cout << "before copyBoard";
+         isFull = false;
+
+         if (!wouldBeChecked(board, x, y, 1)) continue;
+         times++;
+
          Board newBoard = copyBoard(board);
-         cout << "after copyBoard";
          PointType nextTurn;
 
          if (currentPlayer == X) nextTurn = O;
          else nextTurn = X;
          newBoard.data[x][y] = nextTurn;
 
-         Node childNode = negamax(newBoard, nextTurn, score - 1, currentNode, depth + 1); 
+         Node childNode = minimap(newBoard, nextTurn, depth + 1, beta, alpha, !isMax, winPoint); 
          childNode.point.x = x;
          childNode.point.y = y;
-         childNode.value = -childNode.value;
+         childNode.value = childNode.value;
 
-         currentNode = max(currentNode, childNode);
-         
-         if (parentNode.value <= 0) { // current node is max node
-            alpha = currentNode.value;
+         if (isMax) {
+            currentNode = max(currentNode, childNode);
+            alpha = maxInt(alpha, currentNode.value);
          } else {
-            beta = currentNode.value;
+            currentNode = min(currentNode, childNode);
+            alpha = minInt(alpha, currentNode.value);
+         }
+         if (depth == 1) {
+            // drawBoard(newBoard);
+            // cout << "currentNode value: " << currentNode.value << "\n";
          }
 
-         if (alpha > beta) break;
+         if (alpha != 0 && beta != 0 && alpha > beta) break;
       }
    }
+
+   if (isFull) {
+      currentNode.point.x = -1; 
+      currentNode.point.y = -1; 
+      currentNode.value = 0;
+   }
+
+   if (depth == 0) cout << "Eventually value: " << currentNode.value << "\n";
 
    return currentNode;
 }
 
+Point generateMove(int width, int height, PointType** board, Point currentMove, int winPoint) {
+   Board boardData;
+   boardData.width = width;
+   boardData.height = height;
+   boardData.data = board;
 
-Point generateMove(int width, int height, PointType** board, Point currentMove) {
-   Board boardData = {
-      width: width,
-      height: height,
-      data: board
-   };
+   Node currentNode;
+   currentNode.value = 0;
+   currentNode.point = currentMove;
 
-   Node parentNode = {
-      value: 0,
-      point: currentMove
-   };
-
-   Node nextMove = negamax(boardData, currentMove.type, PRIMARY_POINT, parentNode, 0);
+   times = 0;
+   Node nextMove = minimap(boardData, currentMove.type, 0, 0, 0, true, winPoint);
+   cout << "Total loop: " << times << "\n";
 
    PointType newType;
    if (currentMove.type == X) newType = O;
    else newType = X;
 
-   Point returnVal = {
-      x: nextMove.point.x,
-      y: nextMove.point.y,
-      type: newType
-   };
+   Point returnVal;
+   returnVal.x = nextMove.point.x;
+   returnVal.y = nextMove.point.y;
+   returnVal.type = newType;
    return returnVal;
 }
