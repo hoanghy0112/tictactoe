@@ -25,7 +25,7 @@ struct Board
 };
 
 struct Node {
-   int value;
+   float value;
    Point point;
 };
 

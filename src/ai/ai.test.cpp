@@ -18,16 +18,20 @@ int main() {
    }
 
    Point currentMove;
-   currentMove.x = 1;
-   currentMove.y = 1;
+   currentMove.x = 3;
+   currentMove.y = 5;
    currentMove.type = X;
-   board[0][1] = X;
-   // board[0][1] = X;
-   // board[1][0] = O;
+   board[4][4] = X;
+   board[3][5] = X;
+   board[3][4] = O;
+   // board[0][2] = X;
+   // board[2][2] = O;
+   // board[2][1] = X;
+   // board[0][0] = O;
 
 
-   for (int i = 0; i < 9; i++) {
-      Point newMove = generateMove(WIDTH, HEIGHT, board, currentMove, 3);
+   for (int i = 0; i < 99; i++) {
+      Point newMove = generateMove(WIDTH, HEIGHT, board, currentMove, 5);
       if (newMove.x == -1 || newMove.y == -1) {
          cout << "\n" << currentMove.type << " is the winner\n";
          break;
@@ -36,6 +40,13 @@ int main() {
       currentMove = newMove;
       drawPoint(board);
    }
+
+   Board testBoard;
+   testBoard.width = WIDTH;
+   testBoard.height = HEIGHT;
+   testBoard.data = board;
+   drawBoard(testBoard);
+   cout << heuristic(testBoard, currentMove, 5);
    
    cout << "\nFinish\n";
 
