@@ -78,5 +78,5 @@ void AssetsManager::init()
 	}
 
 	// Load font
-
+	m_font.loadFromFile("assets/fonts/Iosevka-Term-Medium.ttf");
 }

@@ -32,48 +32,49 @@
 //  - Nguyễn Hoàng Hy                                  //
 /////////////////////////////////////////////////////////
 
-#include <Scenes/MenuScene.hpp>
 #include <Scenes/AboutScene.hpp>
 #include <Utils/CheckInput.hpp>
 
-MenuScene::MenuScene(GameData::Ref gameData) :
-	m_gameData(gameData),
-	m_isMouseClicked(false)
+AboutScene::AboutScene(GameData::Ref gameData) :
+	m_gameData(gameData)
 {
 }
 
-void MenuScene::init()
+void AboutScene::init()
 {
-	// Setup for title
-	m_title.setTexture(m_gameData->assetsManager.getTexture(2));
-	m_title.setOrigin(sf::Vector2f(m_gameData->assetsManager.getTexture(2).getSize() / 2u));
-	m_title.setPosition(450.f, 100.f);
-	m_title.setColor(sf::Color(24, 29, 49, 255));
+	// Setup for background
+	m_background.setTexture(m_gameData->assetsManager.getTexture(3));
+	m_background.setOrigin(sf::Vector2f(m_gameData->assetsManager.getTexture(3).getSize() / 2u));
+	m_background.setPosition(450.f, 180.f);
+	m_background.setColor(sf::Color(24, 29, 49, 255));
 
-	// Setup for play button
-	m_playButton.setFont(m_gameData->assetsManager.getFont());
-	m_playButton.setString(L"VÀO CHƠI");
-	m_playButton.setStyle(sf::Text::Style::Bold);
-	m_playButton.setOrigin(m_playButton.getLocalBounds().width / 2, m_playButton.getLocalBounds().height / 2);
-	m_playButton.setPosition(450.f, 220.f);
-	m_playButton.setFillColor(sf::Color(24, 29, 49, 255));
+	m_adonis.setFont(m_gameData->assetsManager.getFont());
+	m_adonis.setString("HARDING ADONIS");
+	m_adonis.setStyle(sf::Text::Style::Bold);
+	m_adonis.setCharacterSize(20);
+	m_adonis.setOrigin(m_adonis.getLocalBounds().width / 2, m_adonis.getLocalBounds().height / 2);
+	m_adonis.setPosition(300.f, 380.f);
+	m_adonis.setFillColor(sf::Color(24, 29, 49, 255));
 
-	m_aboutButton.setFont(m_gameData->assetsManager.getFont());
-	m_aboutButton.setString(L"VỀ CHÚNG TÔI");
-	m_aboutButton.setStyle(sf::Text::Style::Bold);
-	m_aboutButton.setOrigin(m_aboutButton.getLocalBounds().width / 2, m_aboutButton.getLocalBounds().height / 2);
-	m_aboutButton.setPosition(450.f, 300.f);
-	m_aboutButton.setFillColor(sf::Color(24, 29, 49, 255));
+	m_hy.setFont(m_gameData->assetsManager.getFont());
+	m_hy.setString(L"NGUYỄN HOÀNG HY");
+	m_hy.setStyle(sf::Text::Style::Bold);
+	m_hy.setCharacterSize(20);
+	m_hy.setOrigin(m_hy.getLocalBounds().width / 2, m_hy.getLocalBounds().height / 2);
+	m_hy.setPosition(600.f, 380.f);
+	m_hy.setFillColor(sf::Color(24, 29, 49, 255));
 
-	m_exitButton.setFont(m_gameData->assetsManager.getFont());
-	m_exitButton.setString(L"THOÁT");
-	m_exitButton.setStyle(sf::Text::Style::Bold);
-	m_exitButton.setOrigin(m_exitButton.getLocalBounds().width / 2, m_exitButton.getLocalBounds().height / 2);
-	m_exitButton.setPosition(450.f, 380.f);
-	m_exitButton.setFillColor(sf::Color(24, 29, 49, 255));
+	// Setup back button
+	m_backButton.setFont(m_gameData->assetsManager.getFont());
+	m_backButton.setString(L"TRỞ VỀ");
+	m_backButton.setStyle(sf::Text::Style::Bold);
+	m_backButton.setCharacterSize(20);
+	m_backButton.setOrigin(m_backButton.getLocalBounds().width / 2, m_backButton.getLocalBounds().height / 2);
+	m_backButton.setPosition(70.f, 450.f);
+	m_backButton.setFillColor(sf::Color(24, 29, 49, 255));
 }
 
-void MenuScene::handleEvent()
+void AboutScene::handleEvent()
 {
 	sf::Event event;
 
@@ -94,7 +95,7 @@ void MenuScene::handleEvent()
 	}
 }
 
-void MenuScene::update(float delta)
+void AboutScene::update(float delta)
 {
 	if (isMouseContainText(m_playButton, m_gameData->window))
 	{
@@ -143,15 +144,14 @@ void MenuScene::update(float delta)
 	}
 }
 
-void MenuScene::draw()
+void AboutScene::draw()
 {
 	m_gameData->window.clear(sf::Color(240, 233, 210, 255));
 
-	m_gameData->window.draw(m_title);
-
-	m_gameData->window.draw(m_playButton);
-	m_gameData->window.draw(m_aboutButton);
-	m_gameData->window.draw(m_exitButton);
+	m_gameData->window.draw(m_background);
+	m_gameData->window.draw(m_backButton);
+	m_gameData->window.draw(m_adonis);
+	m_gameData->window.draw(m_hy);
 
 	m_gameData->window.display();
 }

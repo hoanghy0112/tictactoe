@@ -38,11 +38,11 @@
 #include <Types.hpp>
 #include <Scenes/Scene.hpp>
 
-class MenuScene : public Scene
+class AboutScene : public Scene
 {
 public:
-	MenuScene(GameData::Ref gameData);
-	~MenuScene() = default;
+	AboutScene(GameData::Ref gameData);
+	~AboutScene() = default;
 
 	void init() override;
 
@@ -53,11 +53,11 @@ public:
 private:
 	GameData::Ref	m_gameData;
 
-	sf::Sprite		m_title;
+	sf::Sprite		m_background;
 
-	sf::Text		m_playButton;
-	sf::Text		m_aboutButton;
-	sf::Text		m_exitButton;
+	sf::Text		m_adonis;
+	sf::Text		m_hy;
+	sf::Text		m_backButton;
 
 	bool			m_isMouseClicked;
 };

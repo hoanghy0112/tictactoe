@@ -1,4 +1,4 @@
-﻿/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
 //                                                     //
 //                       _oo0oo_                       //
 //                      o8888888o                      //
@@ -35,29 +35,5 @@
 #pragma once
 
 #include <Config.hpp>
-#include <Types.hpp>
-#include <Scenes/Scene.hpp>
 
-class MenuScene : public Scene
-{
-public:
-	MenuScene(GameData::Ref gameData);
-	~MenuScene() = default;
-
-	void init() override;
-
-	void handleEvent() override;
-	void update(float delta) override;
-	void draw() override;
-
-private:
-	GameData::Ref	m_gameData;
-
-	sf::Sprite		m_title;
-
-	sf::Text		m_playButton;
-	sf::Text		m_aboutButton;
-	sf::Text		m_exitButton;
-
-	bool			m_isMouseClicked;
-};
+bool isMouseContainText(sf::Text& text, sf::Window& window);
