@@ -4,6 +4,8 @@
         <texture id="1">assets/textures/splash_background.png</texture>
         <texture id="2">assets/textures/menu_title.png</texture>
         <texture id="3">assets/textures/about_background.png</texture>
+        <texture id="4">assets/textures/adonis_qrcode.png</texture>
+        <texture id="5">assets/textures/hy_qrcode.png</texture>
     </textures>
     <soundbuffers>
     </soundbuffers>

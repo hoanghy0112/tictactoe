@@ -51,13 +51,21 @@ public:
 	void draw() override;
 
 private:
+	void openURL(const std::string& url);
+
+private:
 	GameData::Ref	m_gameData;
 
 	sf::Sprite		m_background;
 
+	sf::Sprite		m_adonis_qrcode;
+	sf::Sprite		m_hy_qrcode;
+
 	sf::Text		m_adonis;
 	sf::Text		m_hy;
 	sf::Text		m_backButton;
+
+	sf::Text		m_title;
 
 	bool			m_isMouseClicked;
 };

@@ -141,6 +141,8 @@ void MenuScene::update(float delta)
 	{
 		m_exitButton.setFillColor(sf::Color(24, 29, 49, 255));
 	}
+
+	m_isMouseClicked = false;
 }
 
 void MenuScene::draw()
