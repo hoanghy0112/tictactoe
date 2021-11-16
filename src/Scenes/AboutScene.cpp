@@ -145,7 +145,7 @@ void AboutScene::update(float delta)
 
 		if (m_isMouseClicked)
 		{
-			openURL("www.facebook.com/adonis.harding");
+			openURL("https://www.facebook.com/adonis.harding");
 
 			m_isMouseClicked = false;
 		}
@@ -161,7 +161,7 @@ void AboutScene::update(float delta)
 
 		if (m_isMouseClicked)
 		{
-			openURL("www.facebook.com/hy.nguyenhoang");
+			openURL("https://www.facebook.com/hy.nguyenhoang");
 
 			m_isMouseClicked = false;
 		}
