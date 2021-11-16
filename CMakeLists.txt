@@ -22,4 +22,4 @@ set(SRC ${CMAKE_SOURCE_DIR}/Main.cpp
 add_executable(Tic-Tac-Toe ${SRC})
 
 target_include_directories(Tic-Tac-Toe PUBLIC ${CMAKE_SOURCE_DIR}/include)
-target_link_libraries(Tic-Tac-Toe PUBLIC sfml-graphics sfml-audio sfml-windwo sfml-system)
+target_link_libraries(Tic-Tac-Toe PUBLIC sfml-graphics sfml-audio sfml-window sfml-system)
