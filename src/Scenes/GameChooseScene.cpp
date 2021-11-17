@@ -32,47 +32,54 @@
 //  - Nguyễn Hoàng Hy                                  //
 /////////////////////////////////////////////////////////
 
-#pragma once
+#include <Scenes/GameChooseScene.hpp>
 
-#include <Config.hpp>
-#include <Core/SceneManager.hpp>
-#include <Core/AssetsManager.hpp>
-
-struct GameData
+GameChooseScene::GameChooseScene(GameData::Ref gameData) :
+	m_gameData(gameData)
 {
-	using Ref = std::shared_ptr<GameData>;
+}
 
-	SceneManager		sceneManager;
-	AssetsManager		assetsManager;
-
-	sf::RenderWindow	window;
-};
-
-/*
-** Type of point
-*/
-enum class PointType
+void GameChooseScene::init()
 {
-	None = 0,
-	Player_1,
-	Player_2,
-};
+	m_title.setFont(m_gameData->assetsManager.getFont());
+	m_title.setString(L"XIN MỜI CHỌN CHẾ ĐỘ CHƠI");
+	m_title.setStyle(sf::Text::Style::Bold);
+	m_title.setCharacterSize(30);
+	m_title.setOrigin(m_title.getLocalBounds().width / 2, m_title.getLocalBounds().height / 2);
+	m_title.setPosition(450.f, 50.f);
+	m_title.setFillColor(sf::Color(24, 29, 49, 255));
+}
 
-/*
-** Point in a board
-*/
-struct Point
+void GameChooseScene::handleEvent()
 {
-	int			x;
-	int			y;
-	PointType	type;
-};
+	sf::Event event;
 
-/*
-** Struct of board
-*/
-struct BoardData
+	while (m_gameData->window.pollEvent(event))
+	{
+		if (event.type == sf::Event::EventType::Closed)
+		{
+			m_gameData->window.close();
+		}
+
+		if (event.type == sf::Event::EventType::MouseButtonPressed)
+		{
+			if (event.mouseButton.button == sf::Mouse::Button::Left)
+			{
+				m_isMouseClicked = true;
+			}
+		}
+	}
+}
+
+void GameChooseScene::update(float delta)
 {
-	int			size;
-	Point**		data;
-};
+}
+
+void GameChooseScene::draw()
+{
+	m_gameData->window.clear(sf::Color(240, 233, 210, 255));
+
+	m_gameData->window.draw(m_title);
+
+	m_gameData->window.display();
+}

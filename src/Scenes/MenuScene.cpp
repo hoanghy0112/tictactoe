@@ -34,6 +34,7 @@
 
 #include <Scenes/MenuScene.hpp>
 #include <Scenes/AboutScene.hpp>
+#include <Scenes/GameChooseScene.hpp>
 #include <Utils/CheckInput.hpp>
 
 MenuScene::MenuScene(GameData::Ref gameData) :
@@ -102,6 +103,8 @@ void MenuScene::update(float delta)
 
 		if (m_isMouseClicked)
 		{
+			m_gameData->sceneManager.addScene(Scene::Ref(new GameChooseScene(m_gameData)));
+
 			m_isMouseClicked = false;
 		}
 	}

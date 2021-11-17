@@ -35,44 +35,25 @@
 #pragma once
 
 #include <Config.hpp>
-#include <Core/SceneManager.hpp>
-#include <Core/AssetsManager.hpp>
+#include <Types.hpp>
+#include <Scenes/Scene.hpp>
 
-struct GameData
+class GameChooseScene : public Scene
 {
-	using Ref = std::shared_ptr<GameData>;
+public:
+	GameChooseScene(GameData::Ref gameData);
+	~GameChooseScene() = default;
 
-	SceneManager		sceneManager;
-	AssetsManager		assetsManager;
+	void init() override;
 
-	sf::RenderWindow	window;
-};
+	void handleEvent() override;
+	void update(float delta) override;
+	void draw() override;
 
-/*
-** Type of point
-*/
-enum class PointType
-{
-	None = 0,
-	Player_1,
-	Player_2,
-};
+private:
+	GameData::Ref	m_gameData;
 
-/*
-** Point in a board
-*/
-struct Point
-{
-	int			x;
-	int			y;
-	PointType	type;
-};
+	sf::Text		m_title;
 
-/*
-** Struct of board
-*/
-struct BoardData
-{
-	int			size;
-	Point**		data;
+	bool			m_isMouseClicked;
 };

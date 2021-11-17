@@ -11,6 +11,7 @@ set(SRC ${CMAKE_SOURCE_DIR}/Main.cpp
         ${CMAKE_SOURCE_DIR}/src/Core/SceneManager.cpp
 
         ${CMAKE_SOURCE_DIR}/src/Scenes/AboutScene.cpp
+        ${CMAKE_SOURCE_DIR}/src/Scenes/GameChooseScene.cpp
         ${CMAKE_SOURCE_DIR}/src/Scenes/MenuScene.cpp
         ${CMAKE_SOURCE_DIR}/src/Scenes/SplashScene.cpp
 

@@ -46,7 +46,7 @@
 /*
 **  Include tinyxml2
 */
-#include <Utils/tinyxml2.h>
+#include <utils/tinyxml2.h>
 
 
 /*
@@ -57,7 +57,6 @@
 #include <iostream>
 #include <stack>
 #include <map>
-#include <cmath>
 
 
 /*

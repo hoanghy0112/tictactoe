@@ -92,7 +92,7 @@ void AboutScene::init()
 
 	// Setup title
 	m_title.setFont(m_gameData->assetsManager.getFont());
-	m_title.setString(L"CHUYÊN MỤC XIN DONATE :v");
+	m_title.setString(L"CHUYÊN MỤC XIN DONATE");
 	m_title.setStyle(sf::Text::Style::Bold);
 	m_title.setCharacterSize(20);
 	m_title.setOrigin(m_title.getLocalBounds().width / 2, m_title.getLocalBounds().height / 2);
