@@ -41,6 +41,13 @@ class Board {
          int winPoint,
          float heuristicScore = 0
       ); 
+      Board(
+         int width, 
+         int height, 
+         Point currentMove, 
+         int winPoint,
+         float heuristicScore = 0
+      ); 
 
       // Get basic information about the board.
       int getWidth();
@@ -85,4 +92,6 @@ class Board {
       void drawBoard();
 
       Board makeNewMove(Point newMove);
+
+      //! Add destructor function
 };

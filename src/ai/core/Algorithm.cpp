@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include <core/Algorithm.hpp>
-#include <utils/Board.hpp>
-#include <utils/Point.hpp>
-#include <utils/Constants.hpp>
-#include <utils/Math.hpp>
+#include <ai/core/Algorithm.hpp>
+#include <ai/utils/Board.hpp>
+#include <ai/utils/Point.hpp>
+#include <ai/utils/Constants.hpp>
+#include <ai/utils/Math.hpp>
 
 using namespace std;
 
@@ -32,7 +32,7 @@ Node minimap(
       Node returnNode;
       returnNode.state = TERMINAL;
 
-      int score = AIConstant::MAX_SCORE - depth;
+      float score = AIConstant::MAX_SCORE - depth;
 
       if (isMax) returnNode.value = -score;
       else returnNode.value = +score;

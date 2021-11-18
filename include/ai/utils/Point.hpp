@@ -28,6 +28,7 @@ class Point
       Point(Point& );
 
       Point operator!();
+      bool operator==(Point other);
 };
 
 

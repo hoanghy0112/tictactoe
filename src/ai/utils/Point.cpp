@@ -1,4 +1,4 @@
-#include <utils/Point.hpp>
+#include <ai/utils/Point.hpp>
 
 Node maxNode(Node first, Node second) {
    if (first.value > second.value) return first;
@@ -34,4 +34,12 @@ Point Point::operator!() {
    if (this->type == O) newType = X;
    else newType = O;
    return Point(this->x, this->y, newType);
+}
+
+bool Point::operator==(Point other) {
+   if (other.type != this->type) return false;
+   if (other.x != this->x) return false;
+   if (other.y != this->y) return false;
+   
+   return true;
 }

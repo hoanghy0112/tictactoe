@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include <utils/Board.hpp>
-#include <utils/Math.hpp>
-#include <utils/Constants.hpp>
+#include <ai/utils/Board.hpp>
+#include <ai/utils/Math.hpp>
+#include <ai/utils/Constants.hpp>
 
 using namespace std;
 
@@ -28,7 +28,37 @@ Board::Board(
 
    if (heuristicScore != 0) this->heuristicScore = heuristicScore; 
    else this->heuristicScore = this->calculateHeuristicScore();
-   // this->heuristicScore = heuristicScore; 
+}
+
+Board::Board(
+   int width, 
+   int height, 
+   Point currentMove, 
+   int winPoint, 
+   float heuristicScore
+) {
+   PointType** data;
+   data = new PointType*[width];
+   for (int i = 0; i < width; i++) {
+      data[i] = new PointType[height];
+      for (int j = 0; j < height; j++) {
+         data[i][j] = NONE;
+      }
+   }
+
+   this->width = width;
+   this->height = height;
+   this->winPoint = winPoint;
+   this->data = data;
+   this->winPoint = winPoint;
+
+   this->currentMove = currentMove;
+   if (this->getDataOf(currentMove.x, currentMove.y) == NONE) {
+      this->setDataOf(currentMove.x, currentMove.y);
+   }
+
+   if (heuristicScore != 0) this->heuristicScore = heuristicScore; 
+   else this->heuristicScore = this->calculateHeuristicScore();
 }
 
 bool Board::isValid(int x, int y) {
