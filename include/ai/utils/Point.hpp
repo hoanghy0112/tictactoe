@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 enum PointType
 {
    UNDEFINED,
@@ -29,6 +31,8 @@ class Point
 
       Point operator!();
       bool operator==(Point other);
+
+      std::string to_string();
 };
 
 

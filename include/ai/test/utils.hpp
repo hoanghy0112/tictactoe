@@ -1,37 +1,55 @@
 #pragma once
 
-#include <string>
 #include <stdexcept>
 
-using namespace std;
 
-namespace Test {
-   struct Result {
-      bool state;
-      bool isError;
-      char* message;
-   };
-
-   class TestClass {
-      private: 
-         int index;
-
-      public: 
-         TestClass() {
-            this->index = 0;
-         }
-
-         template <class Output>
-         void run(Output output, Output expected, string msg = "") {
-            this->index++;
-            if (!(output == expected)) {
-               string error = "Test with index [" + this->index;
-               error += "] has failed\n\t";
-               error += msg;
-               // throw error.c_str();
-               throw "Error";
-            }
-         }
-   };
+#define ASSERT_EQUAL_NUMBER( x, y )                                  \
+{                                                                   \
+  if(!(( x ) == ( y )))                                              \
+  {                                                                 \
+    throw std::runtime_error(   std::string( __FILE__ )             \
+                              + std::string( ":" )                  \
+                              + std::to_string( __LINE__ )          \
+                              + std::string( " in " )               \
+                              + std::string( __PRETTY_FUNCTION__ )  \
+                              + std::string( ": " )                 \
+                              + std::to_string( ( x ) )             \
+                              + std::string( " != " )               \
+                              + std::to_string( ( y ) )             \
+    );                                                              \
+  }                                                                 \
 }
 
+#define ASSERT_EQUAL_BOOLEAN( x, y )                                  \
+{                                                                   \
+  if(!(( x ) == ( y )))                                              \
+  {                                                                 \
+    throw std::runtime_error(   std::string( __FILE__ )             \
+                              + std::string( ":" )                  \
+                              + std::to_string( __LINE__ )          \
+                              + std::string( " in " )               \
+                              + std::string( __PRETTY_FUNCTION__ )  \
+                              + std::string( ": " )                 \
+                              + std::to_string( ( x ) )             \
+                              + std::string( " != " )               \
+                              + std::to_string( ( y ) )             \
+    );                                                              \
+  }                                                                 \
+}
+
+#define ASSERT_EQUAL_STRING( x, y )                                  \
+{                                                                   \
+  if(!(( x ) == ( y )))                                              \
+  {                                                                 \
+    throw std::runtime_error(   std::string( __FILE__ )             \
+                              + std::string( ":" )                  \
+                              + std::to_string( __LINE__ )          \
+                              + std::string( " in " )               \
+                              + std::string( __PRETTY_FUNCTION__ )  \
+                              + std::string( ": " )                 \
+                              + std::string( ( x ) )             \
+                              + std::string( " != " )               \
+                              + std::string( ( y ) )             \
+    );                                                              \
+  }                                                                 \
+}

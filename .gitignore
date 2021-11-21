@@ -6,3 +6,5 @@
 # Folder
 build/
 .vscode/
+
+CMakeLists.txt

@@ -1,4 +1,5 @@
 #include <ai/utils/Point.hpp>
+#include <string>
 
 Node maxNode(Node first, Node second) {
    if (first.value > second.value) return first;
@@ -42,4 +43,10 @@ bool Point::operator==(Point other) {
    if (other.y != this->y) return false;
    
    return true;
+}
+
+std::string Point::to_string() {
+   std::string res;
+   res = std::to_string(this->x) + std::string("; ") + std::to_string(this->y) + std::string("; ") + std::to_string(this->type);
+   return res;
 }

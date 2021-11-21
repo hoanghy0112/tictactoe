@@ -46,6 +46,8 @@ Board::Board(
       }
    }
 
+   data[currentMove.x][currentMove.y] = currentMove.type;
+
    this->width = width;
    this->height = height;
    this->winPoint = winPoint;
@@ -88,7 +90,7 @@ Point Board::getCurrentMove() {
 }
 
 float Board::getHeuristicScore() {
-   if (this->heuristicScore == 0) 
+   if (this->heuristicScore == 0.0) 
       this->heuristicScore = this->calculateHeuristicScore();
    return this->heuristicScore;
 }
@@ -98,7 +100,7 @@ PointType** Board::getData() {
 }
 
 PointType Board::getDataOf(int x, int y) {
-   if (isValid(x, y)) return OUT_OF_SCOPE;
+   if (!isValid(x, y)) return OUT_OF_SCOPE;
    else return this->data[x][y];
 }
 
@@ -123,7 +125,7 @@ bool Board::shouldBeChecked( int x, int y, int radius) {
 }
 
 bool Board::isTerminal() {
-   return (this->heuristicScore >= AIConstant::MAX_SCORE);
+   return (this->heuristicScore >= this->winPoint);
 }
 
 float Board::calculateHeuristicScore() {
@@ -136,12 +138,11 @@ float Board::calculateHeuristicScore() {
    int directions[4][2] = {
       {0, 1}, {1, 0}, {1, 1}, {1, -1}
    };
+   int reverses[2] = {-1, 1};
    
    float maxScore = 0;
 
    for (int* direction : directions) {
-      int reverses[2] = {-1, 1};
-
       // point is the number of cell with same type in a straight line.
       // point is initialized with 1 because it is current node.
       float point = 1;
@@ -156,12 +157,17 @@ float Board::calculateHeuristicScore() {
 
             point++;
          }
+         // Because the initial value of newX and newY is currentX and currentY,
+         // it will iterate current position twice, so we have to substract 1 
+         // from point
+         point--;
       }
 
       maxScore = max(maxScore, point);
    }
+   // if maxScore == winPoint -> win!!!
 
-   const int heuristicScore =  maxScore / this->winPoint * AIConstant::MAX_SCORE;
+   const float heuristicScore =  maxScore;
    this->heuristicScore = heuristicScore;
 
    return heuristicScore;
@@ -216,6 +222,8 @@ Board Board::makeNewMove(Point newMove) {
          newData[x][y] = this->getDataOf(x, y);
       }
    }
+
+   newData[newMove.x][newMove.y] = newMove.type;
 
    return Board(
       this->getWidth(),

@@ -39,14 +39,14 @@ class Board {
          PointType** board, 
          Point currentMove, 
          int winPoint,
-         float heuristicScore = 0
+         float heuristicScore = 0.0
       ); 
       Board(
          int width, 
          int height, 
          Point currentMove, 
          int winPoint,
-         float heuristicScore = 0
+         float heuristicScore = 0.0
       ); 
 
       // Get basic information about the board.
