@@ -33,7 +33,6 @@
 /////////////////////////////////////////////////////////
 
 #include <Scenes/SplashScene.hpp>
-#include <Scenes/MenuScene.hpp>
 
 SplashScene::SplashScene(GameData::Ref gameData) :
 	m_gameData(gameData),
@@ -43,8 +42,10 @@ SplashScene::SplashScene(GameData::Ref gameData) :
 
 void SplashScene::init()
 {
-	m_color_background = sf::Color(24, 29, 49, 255);
+	m_color_background = sf::Color(77, 63, 27, 255);
 	m_background.setTexture(m_gameData->assetsManager.getTexture(1));
+	m_background.setOrigin(sf::Vector2f(m_gameData->assetsManager.getTexture(1).getSize() / 2u));
+	m_background.setPosition(450.f, 300.f);
 	m_background.setColor(m_color_background);
 }
 
@@ -67,7 +68,6 @@ void SplashScene::update(float delta)
 
 	if (m_time > 3.f)
 	{
-		m_gameData->sceneManager.addScene(Scene::Ref(new MenuScene(m_gameData)));
 	}
 	else
 	{
@@ -79,16 +79,9 @@ void SplashScene::update(float delta)
 
 void SplashScene::draw()
 {
-	m_gameData->window.clear(sf::Color(240, 233, 210, 255));
+	m_gameData->window.clear(sf::Color(254, 250, 224, 255));
 
 	m_gameData->window.draw(m_background);
 
 	m_gameData->window.display();
 }
-
-/*
-**  F0E9D2
-**  E6DDC4
-**  678983
-**  181D31
-*/

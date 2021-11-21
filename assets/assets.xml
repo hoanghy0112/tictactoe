@@ -2,19 +2,6 @@
 <assets>
     <textures>
         <texture id="1">assets/textures/splash_background.png</texture>
-        <texture id="2">assets/textures/menu_title.png</texture>
-        <texture id="3">assets/textures/about_background.png</texture>
-        <texture id="4">assets/textures/adonis_qrcode.png</texture>
-        <texture id="5">assets/textures/hy_qrcode.png</texture>
-        <texture id="6">assets/textures/gird_3x3.png</texture>
-        <texture id="7">assets/textures/gird_5x5.png</texture>
-        <texture id="8">assets/textures/gird_7x7.png</texture>
-        <texture id="9">assets/textures/O_3x3.png</texture>
-        <texture id="10">assets/textures/O_5x5.png</texture>
-        <texture id="11">assets/textures/O_7x7.png</texture>
-        <texture id="12">assets/textures/X_3x3.png</texture>
-        <texture id="13">assets/textures/X_5x5.png</texture>
-        <texture id="14">assets/textures/X_7x7.png</texture>
     </textures>
     <soundbuffers>
     </soundbuffers>

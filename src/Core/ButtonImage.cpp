@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////
+﻿/////////////////////////////////////////////////////////
 //                                                     //
 //                       _oo0oo_                       //
 //                      o8888888o                      //
@@ -32,8 +32,4 @@
 //  - Nguyễn Hoàng Hy                                  //
 /////////////////////////////////////////////////////////
 
-#pragma once
-
-#include <Config.hpp>
-
-bool isMouseContainText(sf::Text& text, sf::Window& window);
+#include <Core/ButtonImage.hpp>

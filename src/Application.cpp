@@ -80,7 +80,7 @@ void Application::init()
 {
 	m_gameData = std::make_shared<GameData>();
 
-	m_gameData->window.create(sf::VideoMode(900, 500), "Tic Tac Toe", sf::Style::Close);
+	m_gameData->window.create(sf::VideoMode(900, 600), "Tic Tac Toe", sf::Style::Close);
 	m_gameData->window.setFramerateLimit(60);
 
 	m_gameData->assetsManager.init();

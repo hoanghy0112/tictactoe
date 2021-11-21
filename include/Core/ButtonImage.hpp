@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////
+﻿/////////////////////////////////////////////////////////
 //                                                     //
 //                       _oo0oo_                       //
 //                      o8888888o                      //
@@ -32,9 +32,18 @@
 //  - Nguyễn Hoàng Hy                                  //
 /////////////////////////////////////////////////////////
 
-#include <Utils/CheckInput.hpp>
+#pragma once
 
-bool isMouseContainText(sf::Text& text, sf::Window& window)
+#include <Config.hpp>
+
+class ButtonImage
 {
-	return text.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(window)));
-}
+public:
+
+
+private:
+	sf::Sprite		m_sprite;
+
+	sf::Texture&	m_textureNormal;
+	sf::Texture&	m_textureHover;
+};

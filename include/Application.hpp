@@ -37,7 +37,7 @@
 #include <Config.hpp>
 #include <Types.hpp>
 
-class Application
+class Application : private sf::NonCopyable
 {
 public:
 	using Ref = std::unique_ptr<Application>;
