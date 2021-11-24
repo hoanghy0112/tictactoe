@@ -1,13 +1,14 @@
 #include <iostream>
 
 #include <ai/core/Algorithm.hpp>
-#include <ai/utils/Board.hpp>
-#include <ai/utils/Point.hpp>
-#include <ai/utils/Constants.hpp>
-#include <ai/utils/Math.hpp>
 
 using namespace std;
 
+
+float returnScore(bool isMax, float score) {
+   if (isMax) return -score;
+   else return score;
+}
 
 Node minimap(
     Board board,
@@ -24,27 +25,27 @@ Node minimap(
    Node currentNode;
    bool isFull = true;
 
-   if (isMax) currentNode.value = -9999;
-   else currentNode.value = 9999;
+   currentNode.value = returnScore(isMax, 9999);
 
    if (board.isTerminal())
    {
       Node returnNode;
       returnNode.state = TERMINAL;
+      returnNode.point = currentMove;
 
-      float score = AIConstant::MAX_SCORE - depth;
+      float score = board.getWinPoint() - depth;
 
-      if (isMax) returnNode.value = -score;
-      else returnNode.value = +score;
+      returnNode.value = returnScore(isMax, score);
 
       return returnNode;
+
    } else if (depth >= maxDepth) {
       Node returnNode;
+      returnNode.point = currentMove;
 
-      const float score = board.getHeuristicScore() * AIConstant::MAX_SCORE / board.getWinPoint() - depth;
+      const float score = board.getHeuristicScore() - depth;
 
-      if (isMax) returnNode.value = score;
-      else returnNode.value = -score;
+      returnNode.value = returnScore(isMax, score);
 
       return returnNode;
    }
@@ -72,7 +73,13 @@ Node minimap(
             alpha = max(alpha, currentNode.value);
          } else {
             currentNode = minNode(currentNode, childNode);
-            alpha = min(alpha, currentNode.value);
+            beta = min(beta, currentNode.value);
+         }
+
+         currentNode.point.type = nextMove.type;
+
+         if (depth == 1) {
+            cout << currentNode.value << endl;
          }
 
          if (alpha != 0 && beta != 0 && alpha > beta) break;
@@ -83,8 +90,8 @@ Node minimap(
       currentNode.point.x = -1; 
       currentNode.point.y = -1; 
       currentNode.value = 0;
+      currentNode.point.type = UNDEFINED;
    }
-
 
    return currentNode;
 }
@@ -93,12 +100,11 @@ Point generateMove(Board board, int maxDepth) {
    Node nextMove = minimap(board, 0, 0, 0, true, maxDepth);
 
    PointType newType;
-   if (board.getCurrentMove().type == X) newType = O;
-   else newType = X;
+   // if (board.getCurrentMove().type == X) newType = O;
+   // else newType = X;
 
-   Point returnVal;
-   returnVal.x = nextMove.point.x;
-   returnVal.y = nextMove.point.y;
-   returnVal.type = newType;
-   return returnVal;
+   Point returnPoint = nextMove.point;
+   // returnPoint.x = nextMove.point.x;
+   // returnPoint.y = nextMove.point.y;
+   return returnPoint;
 }

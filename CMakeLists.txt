@@ -19,8 +19,8 @@ enable_testing()
 
 add_executable(Board_testing "src/ai/test/Board.test.cpp" ${SOURCE})
 add_executable(Point_testing "src/ai/test/Point.test.cpp" ${SOURCE})
-add_executable(Main_testing "src/ai/test/index.test.cpp" ${SOURCE})
+add_executable(Main_testing "src/ai/test/Algorithm.test.cpp" ${SOURCE})
 
 add_test("BoardTesting" Board_testing)
 add_test("PointTesting" Point_testing)
-add_test("MainTesting" Point_testing)
+add_test("MainTesting" Main_testing)

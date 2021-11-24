@@ -62,6 +62,26 @@ Board::Board(
    if (heuristicScore != 0) this->heuristicScore = heuristicScore; 
    else this->heuristicScore = this->calculateHeuristicScore();
 }
+Board::Board(
+   int width, 
+   int height, 
+   int winPoint
+) {
+   this->width = width;
+   this->height = height;
+
+   PointType** data;
+   data = new PointType*[width];
+   for (int i = 0; i < width; i++) {
+      data[i] = new PointType[height];
+      for (int j = 0; j < height; j++) {
+         data[i][j] = NONE;
+      }
+   }
+
+   this->data = data;
+   this->winPoint = winPoint;
+}
 
 bool Board::isValid(int x, int y) {
    if (
@@ -70,6 +90,7 @@ bool Board::isValid(int x, int y) {
       y < 0 ||
       y >= height
    ) return false;
+   // if (this->data[x][y] != NONE) return false;
    else return true;
 }
 
@@ -129,7 +150,7 @@ bool Board::isTerminal() {
 }
 
 float Board::calculateHeuristicScore() {
-   if (this->heuristicScore != 0) return this->heuristicScore;
+   // if (this->heuristicScore != 0) return this->heuristicScore;
 
    PointType currentType = this->currentMove.type;
    int currentX = this->currentMove.x;
@@ -170,31 +191,41 @@ float Board::calculateHeuristicScore() {
    const float heuristicScore =  maxScore;
    this->heuristicScore = heuristicScore;
 
+   // cout <<  heuristicScore << "\n";
    return heuristicScore;
 }
 
-// Board Board::operator=(Board board) {
-//    const int width = board.getWidth();
-//    const int height = board.getHeight();
+Board& Board::operator=(Board board) {
+   this->width = board.getWidth();
+   this->height = board.getHeight();
+   this->heuristicScore = board.getHeuristicScore();
+   this->winPoint = board.getWinPoint();
+   this->currentMove = board.getCurrentMove();
+   this->data = board.getData();
 
-//    PointType** newData;
-//    newData = new PointType*[width];
+   return *this;
 
-//    for (int x = 0; x < width; x++) {
-//       newData[x] = new PointType[height];
-//       for (int y = 0; y < height; y++) {
-//          newData[x][y] = board.getDataOf(x, y);
-//       }
-//    }
+   // const int width = board.getWidth();
+   // const int height = board.getHeight();
 
-//    return Board(
-//       board.getWidth(), 
-//       board.getHeight(), 
-//       newData, 
-//       board.getCurrentMove(),
-//       board.getWinPoint()
-//    );
-// }
+   // PointType** newData;
+   // newData = new PointType*[width];
+
+   // for (int x = 0; x < width; x++) {
+   //    newData[x] = new PointType[height];
+   //    for (int y = 0; y < height; y++) {
+   //       newData[x][y] = board.getDataOf(x, y);
+   //    }
+   // }
+
+   // return Board(
+   //    board.getWidth(), 
+   //    board.getHeight(), 
+   //    newData, 
+   //    board.getCurrentMove(),
+   //    board.getWinPoint()
+   // );
+}
 
 void Board::drawBoard() {
    PointType** board = this->getData();
@@ -232,4 +263,11 @@ Board Board::makeNewMove(Point newMove) {
       newMove,
       this->getWinPoint()
    );
+}
+
+Board::~Board() {
+   // for (int i = 0; i < this->getWidth() - 1; i++) {
+   //    delete[] this->data[i];
+   // }
+   // delete[] this->data;
 }

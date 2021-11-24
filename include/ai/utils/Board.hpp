@@ -48,6 +48,11 @@ class Board {
          int winPoint,
          float heuristicScore = 0.0
       ); 
+      Board(
+         int width, 
+         int height, 
+         int winPoint
+      ); 
 
       // Get basic information about the board.
       int getWidth();
@@ -87,6 +92,8 @@ class Board {
       // Check whether a board is terminal or not (one of two player win)
       bool isTerminal();
 
+      Board& operator=(Board other);
+
       //! Quick draw the board for debugging
       //! Delete this in production app
       void drawBoard();
@@ -94,4 +101,15 @@ class Board {
       Board makeNewMove(Point newMove);
 
       //! Add destructor function
+      ~Board();
+};
+
+class A {
+   public:
+      int a;
+      A() = default;
+      A& operator=(A other) {
+         this->a = other.a;
+         return *this;
+      }
 };

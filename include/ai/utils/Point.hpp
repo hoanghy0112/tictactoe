@@ -12,8 +12,8 @@ enum PointType
 };
 
 enum NodeState {
-   PROCESSING,
-   DONE,
+   INITIAL,
+   PENDING,
    TERMINAL,
    ERROR,
 };
@@ -36,11 +36,18 @@ class Point
 };
 
 
-struct Node {
-   float value;
-   Point point;
-   NodeState state;
+class Node {
+   public: 
+      float value;
+      Point point;
+      NodeState state;
+
+      Node();
+      Node(float, Point, NodeState);
+      Node(Node &);
+      
 };
 
 Node maxNode(Node first, Node second);
 Node minNode(Node first, Node second);
+

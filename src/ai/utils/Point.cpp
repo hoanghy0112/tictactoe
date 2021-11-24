@@ -1,6 +1,7 @@
 #include <ai/utils/Point.hpp>
 #include <string>
 
+
 Node maxNode(Node first, Node second) {
    if (first.value > second.value) return first;
    else return second;
@@ -50,3 +51,30 @@ std::string Point::to_string() {
    res = std::to_string(this->x) + std::string("; ") + std::to_string(this->y) + std::string("; ") + std::to_string(this->type);
    return res;
 }
+
+Node::Node() {
+   this->value = 0;
+   this->state = INITIAL;
+}
+
+Node::Node(float value, Point point, NodeState state) {
+   this->value = value; 
+   this->point = point;
+   this->state = state;
+}
+
+Node::Node(Node& other) {
+   this->value = other.value;
+   this->point = other.point;
+   this->state = other.state;
+}
+
+// Node maxNode(Node first, Node second) {
+//    if (first.value > second.value) return first;
+//    else return second;
+// }
+
+// Node minNode(Node first, Node second) {
+//    if (first.value < second.value) return first;
+//    else return second;
+// }
