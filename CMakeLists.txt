@@ -8,14 +8,12 @@ find_package(SFML 2.5 COMPONENTS graphics audio window system REQUIRED)
 set(SRC ${CMAKE_SOURCE_DIR}/Main.cpp
 
         ${CMAKE_SOURCE_DIR}/src/Core/AssetsManager.cpp
+        ${CMAKE_SOURCE_DIR}/src/Core/ButtonImage.cpp
         ${CMAKE_SOURCE_DIR}/src/Core/SceneManager.cpp
 
-        ${CMAKE_SOURCE_DIR}/src/Scenes/AboutScene.cpp
-        ${CMAKE_SOURCE_DIR}/src/Scenes/GameChooseScene.cpp
         ${CMAKE_SOURCE_DIR}/src/Scenes/MenuScene.cpp
         ${CMAKE_SOURCE_DIR}/src/Scenes/SplashScene.cpp
 
-        ${CMAKE_SOURCE_DIR}/src/Utils/CheckInput.cpp
         ${CMAKE_SOURCE_DIR}/src/Utils/tinyxml2.cpp
 
         ${CMAKE_SOURCE_DIR}/src/Application.cpp)
