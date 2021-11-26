@@ -32,26 +32,58 @@
 //  - Nguyễn Hoàng Hy                                  //
 /////////////////////////////////////////////////////////
 
-#include <Scenes/SplashScene.hpp>
 #include <Scenes/MenuScene.hpp>
 
-SplashScene::SplashScene(GameData::Ref gameData) :
-	m_gameData(gameData),
-	m_time(0.f)
+MenuScene::MenuScene(GameData::Ref gameData) :
+	m_gameData(gameData)
 {
 }
 
-void SplashScene::init()
+MenuScene::~MenuScene()
 {
-	m_color_background = sf::Color(77, 63, 27, 255);
+	if (m_play_button != nullptr)
+	{
+		delete m_play_button;
 
-	m_background.setTexture(m_gameData->assetsManager.getTexture(1));
-	m_background.setOrigin(sf::Vector2f(m_gameData->assetsManager.getTexture(1).getSize() / 2u));
-	m_background.setPosition(450.f, 300.f);
-	m_background.setColor(m_color_background);
+		m_play_button = nullptr;
+	}
+
+	if (m_about_button != nullptr)
+	{
+		delete m_about_button;
+
+		m_about_button = nullptr;
+	}
+
+	if (m_exit_button != nullptr)
+	{
+		delete m_exit_button;
+
+		m_exit_button = nullptr;
+	}
 }
 
-void SplashScene::handleEvent()
+void MenuScene::init()
+{
+	m_background.setTexture(m_gameData->assetsManager.getTexture(2));
+	m_background.setOrigin(sf::Vector2f(m_gameData->assetsManager.getTexture(2).getSize() / 2u));
+	m_background.setPosition(800.f, 400.f);
+
+	m_title.setTexture(m_gameData->assetsManager.getTexture(3));
+	m_title.setOrigin(sf::Vector2f(m_gameData->assetsManager.getTexture(3).getSize() / 2u));
+	m_title.setPosition(450.f, 160.f);
+
+	m_play_button = new ButtonImage(m_gameData->assetsManager.getTexture(4), m_gameData->assetsManager.getTexture(5));
+	m_play_button->setPosition(450.f, 280.f);
+
+	m_about_button = new ButtonImage(m_gameData->assetsManager.getTexture(6), m_gameData->assetsManager.getTexture(7));
+	m_about_button->setPosition(450.f, 360.f);
+
+	m_exit_button = new ButtonImage(m_gameData->assetsManager.getTexture(8), m_gameData->assetsManager.getTexture(9));
+	m_exit_button->setPosition(450.f, 440.f);
+}
+
+void MenuScene::handleEvent()
 {
 	sf::Event event;
 
@@ -61,30 +93,39 @@ void SplashScene::handleEvent()
 		{
 			m_gameData->window.close();
 		}
+
+		m_play_button->handleEvent(event);
+		m_about_button->handleEvent(event);
+		m_exit_button->handleEvent(event);
 	}
 }
 
-void SplashScene::update(float delta)
+void MenuScene::update(float delta)
 {
-	m_time += delta;
-
-	if (m_time > 3.f)
+	if (m_play_button->isButtonPressed(m_gameData->window))
 	{
-		m_gameData->sceneManager.addScene(Scene::Ref(new MenuScene(m_gameData)));
 	}
-	else
-	{
-		m_color_background.a = static_cast<sf::Uint8>(std::sin(m_time * 60 * DEG_TO_RAD) * 255);
 
-		m_background.setColor(m_color_background);
+	if (m_about_button->isButtonPressed(m_gameData->window))
+	{
+	}
+
+	if (m_exit_button->isButtonPressed(m_gameData->window))
+	{
+		m_gameData->window.close();
 	}
 }
 
-void SplashScene::draw()
+void MenuScene::draw()
 {
 	m_gameData->window.clear(sf::Color(254, 250, 224, 255));
 
 	m_gameData->window.draw(m_background);
+	m_gameData->window.draw(m_title);
+
+	m_play_button->draw(m_gameData->window);
+	m_about_button->draw(m_gameData->window);
+	m_exit_button->draw(m_gameData->window);
 
 	m_gameData->window.display();
 }

@@ -1,7 +1,15 @@
 <?xml version="1.0"?>
 <assets>
     <textures>
-        <texture id="1">assets/textures/splash_background.png</texture>
+        <texture id="1">assets/textures/splash_tittle.png</texture>
+        <texture id="2">assets/textures/menu_background.png</texture>
+        <texture id="3">assets/textures/menu_title.png</texture>
+        <texture id="4">assets/textures/play_button.png</texture>
+        <texture id="5">assets/textures/play_button_hover.png</texture>
+        <texture id="6">assets/textures/about_button.png</texture>
+        <texture id="7">assets/textures/about_button_hover.png</texture>
+        <texture id="8">assets/textures/exit_button.png</texture>
+        <texture id="9">assets/textures/exit_button_hover.png</texture>
     </textures>
     <soundbuffers>
     </soundbuffers>

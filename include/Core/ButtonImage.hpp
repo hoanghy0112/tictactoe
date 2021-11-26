@@ -39,11 +39,23 @@
 class ButtonImage
 {
 public:
+	ButtonImage(sf::Texture& textureNormal, sf::Texture& textureHover);
 
+	void setPosition(float x, float y);
+
+	void handleEvent(const sf::Event& event);
+	void draw(sf::RenderTarget& renderer) const;
+
+	bool isButtonPressed(sf::Window& window);
+
+private:
+	void init();
 
 private:
 	sf::Sprite		m_sprite;
 
 	sf::Texture&	m_textureNormal;
 	sf::Texture&	m_textureHover;
+
+	bool			m_isMouseClicked;
 };

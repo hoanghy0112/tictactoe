@@ -32,62 +32,32 @@
 //  - Nguyễn Hoàng Hy                                  //
 /////////////////////////////////////////////////////////
 
+#pragma once
+
+#include <Config.hpp>
+#include <Types.hpp>
+#include <Scenes/Scene.hpp>
 #include <Core/ButtonImage.hpp>
 
-ButtonImage::ButtonImage(sf::Texture& textureNormal, sf::Texture& textureHover) :
-	m_textureNormal(textureNormal),
-	m_textureHover(textureHover),
-	m_isMouseClicked(false)
+class MenuScene : public Scene
 {
-	init();
-}
+public:
+	MenuScene(GameData::Ref gameData);
+	~MenuScene();
 
-void ButtonImage::setPosition(float x, float y)
-{
-	m_sprite.setPosition(x, y);
-}
+	void init() override;
 
-void ButtonImage::handleEvent(const sf::Event& event)
-{
-	if (event.type == sf::Event::EventType::MouseButtonPressed)
-	{
-		if (event.mouseButton.button == sf::Mouse::Button::Left)
-		{
-			m_isMouseClicked = true;
-		}
-	}
-}
+	void handleEvent() override;
+	void update(float delta) override;
+	void draw() override;
 
-void ButtonImage::draw(sf::RenderTarget& renderer) const
-{
-	renderer.draw(m_sprite);
-}
+private:
+	GameData::Ref	m_gameData;
 
-bool ButtonImage::isButtonPressed(sf::Window& window)
-{
-	if (m_sprite.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(window))))
-	{
-		m_sprite.setTexture(m_textureHover);
+	sf::Sprite		m_title;
+	sf::Sprite		m_background;
 
-		if (m_isMouseClicked)
-		{
-			m_isMouseClicked = false;
-
-			return true;
-		}
-	}
-	else
-	{
-		m_sprite.setTexture(m_textureNormal);
-	}
-
-	m_isMouseClicked = false;
-
-	return false;
-}
-
-void ButtonImage::init()
-{
-	m_sprite.setTexture(m_textureNormal);
-	m_sprite.setOrigin(sf::Vector2f(m_textureNormal.getSize() / 2u));
-}
+	ButtonImage*	m_play_button;
+	ButtonImage*	m_about_button;
+	ButtonImage*	m_exit_button;
+};
