@@ -1,43 +1,23 @@
-# Tic-tac-toe game
+# Tic Tac Toe Game
 
-## Set up project
+## Requirements
+- Git
+- Cmake
+- SFML library
+- Compiler C++ such as: Visual Studio, MinGW / GCC,...
 
-Clone project
-
+## Build project
+- Clone repository
 ```
-git clone https://github.com/hoanghy0112/tictactoe.git
+git clone https://github.com/hoanghy0112/tictactoe.git -b graphics
 cd tictactoe
 ```
-
-Create CMake
-
+- Build project
 ```
 mkdir build
 cd build
 cmake ..
-```
-
-Build project
-
-```
 cmake --build .
 ```
 
-Executable file will be in `build` folder
-
-## Project structure
-
-```
-.
-└── src                             // All source code for app
-    ├── core                        // Logic handlers
-    │   └── index.h
-    │   ...
-    ├── draw                        // Graphic handlers
-    │   └── index.h
-    │   ...
-    └── pages                       // Page handlers - Perform page interface
-    │   └── index.h
-    │   ...
-    └── index.cpp                   // Main file
-```
+## Images
