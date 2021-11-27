@@ -91,6 +91,10 @@ void Application::init()
 	m_gameData->assetsManager.init();
 
 	m_gameData->sceneManager.addScene(Scene::Ref(new SplashScene(this->m_gameData)));
+
+	m_gameData->background_music.openFromFile("assets/audios/background_music.ogg");
+	m_gameData->background_music.setLoop(true);
+	m_gameData->background_music.play();
 }
 
 void Application::destroy()

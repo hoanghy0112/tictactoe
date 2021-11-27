@@ -46,6 +46,8 @@ struct GameData
 	AssetsManager		assetsManager;
 
 	sf::RenderWindow	window;
+
+	sf::Music			background_music;
 };
 
 /*
