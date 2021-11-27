@@ -56,6 +56,5 @@ private:
 
 private:
 	std::map<int, sf::Texture>		m_textures;
-	std::map<int, sf::SoundBuffer>	m_soundBuffer;
 	sf::Font						m_font;
 };

@@ -20,6 +20,4 @@
         <texture id="17">assets/textures/hy_github.png</texture>
         <texture id="18">assets/textures/hy_github_hover.png</texture>
     </textures>
-    <soundbuffers>
-    </soundbuffers>
 </assets>

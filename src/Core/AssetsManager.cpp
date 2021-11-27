@@ -65,18 +65,6 @@ void AssetsManager::init()
 		m_textures[id] = texture;
 	}
 
-	// Load sound buffers
-	for (auto element = soundBuffers->FirstChildElement(); element != nullptr; element = element->NextSiblingElement())
-	{
-		int id = std::atoi(element->Attribute("id"));
-		std::string path = element->GetText();
-
-		sf::SoundBuffer soundBuffer;
-		soundBuffer.loadFromFile(path);
-
-		m_soundBuffer[id] = soundBuffer;
-	}
-
 	// Load font
 	m_font.loadFromFile("assets/fonts/Iosevka-Term-Medium.ttf");
 }
