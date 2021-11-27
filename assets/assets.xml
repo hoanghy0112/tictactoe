@@ -10,6 +10,15 @@
         <texture id="7">assets/textures/about_button_hover.png</texture>
         <texture id="8">assets/textures/exit_button.png</texture>
         <texture id="9">assets/textures/exit_button_hover.png</texture>
+        <texture id="10">assets/textures/about_background.png</texture>
+        <texture id="11">assets/textures/adonis_profile.png</texture>
+        <texture id="12">assets/textures/hy_profile.png</texture>
+        <texture id="13">assets/textures/back_button.png</texture>
+        <texture id="14">assets/textures/back_button_hover.png</texture>
+        <texture id="15">assets/textures/adonis_github.png</texture>
+        <texture id="16">assets/textures/adonis_github_hover.png</texture>
+        <texture id="17">assets/textures/hy_github.png</texture>
+        <texture id="18">assets/textures/hy_github_hover.png</texture>
     </textures>
     <soundbuffers>
     </soundbuffers>

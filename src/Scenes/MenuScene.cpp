@@ -33,6 +33,7 @@
 /////////////////////////////////////////////////////////
 
 #include <Scenes/MenuScene.hpp>
+#include <Scenes/AboutScene.hpp>
 
 MenuScene::MenuScene(GameData::Ref gameData) :
 	m_gameData(gameData)
@@ -108,6 +109,7 @@ void MenuScene::update(float delta)
 
 	if (m_about_button->isButtonPressed(m_gameData->window))
 	{
+		m_gameData->sceneManager.addScene(Scene::Ref(new AboutScene(m_gameData)), false);
 	}
 
 	if (m_exit_button->isButtonPressed(m_gameData->window))
