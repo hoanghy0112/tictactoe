@@ -9,7 +9,7 @@
 ## Build project
 - Clone repository
 ```
-git clone https://github.com/hoanghy0112/tictactoe.git -b graphics
+git clone https://github.com/hoanghy0112/tictactoe.git
 cd tictactoe
 ```
 - Build project
