@@ -34,8 +34,10 @@
 
 #include <Application.hpp>
 #include <Scenes/SplashScene.hpp>
+#include <Cursor.hpp>
 
-Application::Ref s_application_instance = nullptr;
+static Application::Ref s_application_instance = nullptr;
+static sf::Cursor s_cursor;
 
 Application::Application()
 {
@@ -80,8 +82,11 @@ void Application::init()
 {
 	m_gameData = std::make_shared<GameData>();
 
-	m_gameData->window.create(sf::VideoMode(900, 600), "Tic Tac Toe", sf::Style::Close);
+	m_gameData->window.create(sf::VideoMode(900, 600), "Tic Tac Toe", sf::Style::Titlebar);
 	m_gameData->window.setFramerateLimit(60);
+
+	s_cursor.loadFromPixels(cursor.pixel_data, sf::Vector2u(cursor.width, cursor.height), sf::Vector2u(0u, 0u));
+	m_gameData->window.setMouseCursor(s_cursor);
 
 	m_gameData->assetsManager.init();
 
